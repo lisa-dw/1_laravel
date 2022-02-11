@@ -27,22 +27,14 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)  //저장, 생성
+    public function store(Request $request)  //전체 저장, 생성
     {
-//        Log::info(__METHOD__);
-////        Log::info($request->all());
-//        Log::info('111');
-//        $a = 1;
-
-//        try{
-//            $outs = User::create($request->all());
-//        }catch(\Exception $e){
-//            Log::info($e->getMessage());
-//        }
+        Log::info(__METHOD__);
+        Log::info($request->all());
 
         $outs = User::create($request->all());
-        Log::info($outs);
 
+        Log::info($outs);
 
         return $outs;
     }
@@ -80,4 +72,17 @@ class UsersController extends Controller
     {
         //
     }
+
+//    public function login($request)
+//    {
+////        $inputId=$request-> userId;
+////
+////         DB::table('user') -> select('userid') -> where('userid',$inputId);
+////
+////         $
+//
+//
+//        if ($request-> id = $)
+//    }
+
 }
