@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\vi\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,9 @@ class UsersController extends Controller
      */
     public function index()  // list
     {
-        //
+        $outs = User::all();
+
+        return $outs;
     }
 
     /**
@@ -26,10 +29,20 @@ class UsersController extends Controller
      */
     public function store(Request $request)  //저장, 생성
     {
-        Log::info(__METHOD__);
-        Log::info($request);
+//        Log::info(__METHOD__);
+////        Log::info($request->all());
+//        Log::info('111');
+//        $a = 1;
+
+//        try{
+//            $outs = User::create($request->all());
+//        }catch(\Exception $e){
+//            Log::info($e->getMessage());
+//        }
 
         $outs = User::create($request->all());
+        Log::info($outs);
+
 
         return $outs;
     }
