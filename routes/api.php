@@ -19,9 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/users/checkUserId/{userid}', [\App\Http\Controllers\Api\vi\User\UsersController::class, 'checkUserId']);
+Route::get('/users/checkUserEM/{email}', [\App\Http\Controllers\Api\vi\User\UsersController::class, 'checkUserEmail']);
+Route::get('/users/checkUserPh/{phone}', [\App\Http\Controllers\Api\vi\User\UsersController::class, 'checkUserPhone' ]);
+
 
 Route::apiResources([
 
     '/users' => App\Http\Controllers\Api\vi\User\UsersController::class,
+
 
 ]);

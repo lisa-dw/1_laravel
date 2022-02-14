@@ -10,6 +10,54 @@ use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
+
+    // 이메일 중복체크 메서드
+    public function checkUserEmail($email){
+        Log::info($email);
+
+        $outs = false;
+
+        if($email){
+            $outs = User::where('email', $email) -> first();
+        }
+        Log::info($outs);
+
+        return (empty($outs));
+
+    }
+
+
+    // 핸드폰번호 중복체크 메서드
+    public function checkUserPhone($phone){
+
+        $outs = false;
+
+        if($phone){
+            $outs = User::where('phone', $phone) -> first();
+        }
+        return (empty($outs));
+
+    }
+
+
+    // id 중복체크 메서드
+    public function checkUserId($userid){
+
+        Log::info($userid); // 유저가 기재한 아이디가 잘 들어왔나 확인하는 로그.
+
+        // $outs의 기본 값을 false로 정하고 시작한 것.
+        // 지정하지 않아도 되지만 그러면 언디파인드가 뜨기 때문에 그냥 지정하고 시작한 것.
+        $outs = false;
+
+        if($userid) {
+            $outs = User::where('userid',$userid)->first();
+        }
+        // if의 조건이 다 부합하면 리턴한다.
+        // empty() => 비어있는지 아닌지를 나타내주는 함수. / Null도 비어져있는 것과 같음.
+        // 비어 있으면 true(1), 비어있지 않으면 False(0)를 반환한다.
+        return (empty($outs));
+    }
+
     /**
      * Display a listing of the resource.
      *
