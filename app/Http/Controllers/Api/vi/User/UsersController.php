@@ -11,6 +11,22 @@ use Illuminate\Support\Facades\Log;
 class UsersController extends Controller
 {
 
+    public function login(Request $request){
+
+        Log::info('request');
+        Log::info($request);
+
+        $userId = $request->user->userid->get();
+        $userPw = $request->user->password->get();
+
+        if($userId){
+            $outs = User::where('userid',$userId)->first();
+        }
+        return ;
+    }
+
+
+
     // 이메일 중복체크 메서드
     public function checkUserEmail($email){
         Log::info($email);
@@ -83,16 +99,20 @@ class UsersController extends Controller
 
 
         // 1. 유효성검사가 맞으면
-        $request->validate([
+        $validataData = $request->validateWithBag('post', [
 
-            'userid' => 'required|min:8|unique:users|regex:/[a-zA-Z0-9]/',
+            'userid' => 'required|min:8|unique:users|regex:/^[a-zA-Z0-9]*$/',
             'password'=> 'required|regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/',
             'name' => 'required',
-            'email'=>'required|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+.[a-zA-Z]$/',
-            'phone'=>'required|regex:/(01)[0-9]{9}/',
+            'email'=>'required|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+.[a-zA-Z]*$/',
+            'phone'=>'required|regex:/^(01)[0-9]{9}$/',
             'address'=>'required',
 
         ]);
+
+//        $request->validate([
+//
+//        ]);
 
         //2. 데이터가 저장된다(회원가입이 된다)
         $outs = User::create($request->all());
