@@ -16,13 +16,13 @@ class UsersController extends Controller
         Log::info('request');
         Log::info($request);
 
-        $userId = $request->user->userid->get();
-        $userPw = $request->user->password->get();
+        $userId = $request->userid->first();
+        $userPw = $request->password->first();
 
         if($userId){
-            $outs = User::where('userid',$userId)->first();
+           $out = User::where('userid', $userId)->first();
         }
-        return ;
+        return $out;
     }
 
 
