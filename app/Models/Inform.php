@@ -13,6 +13,7 @@ class Inform extends Model
         'title',
         'content',
         'user_userid',
+        'imgSrc'
     ];
 
     protected $casts = [

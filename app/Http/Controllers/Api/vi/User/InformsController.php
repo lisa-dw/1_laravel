@@ -18,7 +18,7 @@ class InformsController extends Controller
     {
         Log::info(__METHOD__);
 
-        $outs = Inform::all();
+        $outs = Inform::orderBy('created_at', 'desc')->get();
 
         return $outs;
     }
@@ -58,7 +58,12 @@ class InformsController extends Controller
      */
     public function update(Request $request, Inform $inform)
     {
+        Log::info($request);
+        Log::info($inform);
+
         $outs = $inform->update($request->all());
+
+        Log::info($outs);
 
         return $outs;
     }

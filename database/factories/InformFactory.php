@@ -21,6 +21,7 @@ class InformFactory extends Factory
             'title'=>$this->faker->title(),
             'content'=>$this->faker->text(),
             'user_userid'=> User::inRandomOrder()->first()->userid,
+            'imgSrc'=>$this->faker->text()
         ];
     }
 }

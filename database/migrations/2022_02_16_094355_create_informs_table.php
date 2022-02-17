@@ -22,6 +22,8 @@ class CreateInformsTable extends Migration
             $table->foreign('user_userid')->references('userid')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            $table->string('imgSrc')->nullable();
+
             $table->timestamps();
         });
     }
