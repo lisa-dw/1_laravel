@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShoppingListTable extends Migration
+class CreateInformsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,15 @@ class CreateShoppingListTable extends Migration
      */
     public function up()
     {
-        Schema::create('shopping_list', function (Blueprint $table) {
+        Schema::create('informs', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->string('user_userid');
+
+            $table->foreign('user_userid')->references('userid')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +33,6 @@ class CreateShoppingListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shopping_list');
+        Schema::dropIfExists('informs');
     }
 }

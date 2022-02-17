@@ -31,6 +31,6 @@ Route::get('/users/checkUserPh/{phone}', [\App\Http\Controllers\Api\vi\User\User
 Route::apiResources([
 
     '/users' => App\Http\Controllers\Api\vi\User\UsersController::class,
-
+    '/informs' => \App\Http\Controllers\Api\vi\User\InformsController::class,
 
 ]);

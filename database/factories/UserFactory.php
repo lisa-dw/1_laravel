@@ -22,6 +22,7 @@ class UserFactory extends Factory
             'password' => $this->faker->password(),
             'zip' => $this -> faker->postcode(),
             'address' => $this->faker->address(),
+            'subAddress'=> $this->faker->address(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
