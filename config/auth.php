@@ -36,12 +36,11 @@ return [
     */
 
     'guards' => [
-        'jwt' => [
+        'api' => [
             //jwt 드라이버 추가
             'driver' => 'jwt',
             'provider' => 'users'
         ],
-
 
         'web' => [
             'driver' => 'session',

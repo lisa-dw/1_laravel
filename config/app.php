@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // JWT 미들웨어 설정
+        \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
     ],
 
     /*

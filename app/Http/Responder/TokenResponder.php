@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 
 class TokenResponder
 {
-    public function __invoke($token, int $ttl):JsonResponse
+    public function __invoke($token, int $ttl): JsonResponse
     {
         // 토큰이 없으면,
         // JsonResponse에,

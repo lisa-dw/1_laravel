@@ -6,30 +6,68 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
 
-    public function login(Request $request){
+    //로그인 메서드
+    public function login(Request $request)
+    {
+        $validator=Validator::make($request->all(), [
+            'userid' => 'required|min:8|unique:users|regex:/^[a-zA-Z0-9]*$/',
+            'password'=> 'required|regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/',
+        ]);
 
-        Log::info('request');
-        Log::info($request);
-
-        $userId = $request->userid->first();
-        $userPw = $request->password->first();
-
-        if($userId){
-           User::where('userid', $userId)->first();
+        if($validator->fails()){
+            return response()->json([
+               'status' => 'error',
+               'messages' => $validator->messages()
+            ], 200);
         }
 
-        if($userPw){
-            $out = User::where('password', $userPw)->first();
-        }
-        Log::info($out);
 
-        return (empty($out));
+        if(!$token = Auth::guard('api')->attempt(['userid'=>$request->userid, 'password'=>$request->password]))
+        {
+            return response()->json(['error'=>'Unauthorized', 401]);
+        }
+        return $this->respondWithToken($token);
+
     }
+
+    // 토큰 생성 메서드 : 로그인에 성공하면 요청(Request)에 대한 jwt 토큰을 반환(Response)
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' =>Auth::guard('api')->factory()->getTTL() * 60
+        ]);
+    }
+
+
+
+
+//    public function login(Request $request){
+//
+//        Log::info('request');
+//        Log::info($request);
+//
+//        $userId = $request->userid->first();
+//        $userPw = $request->password->first();
+//
+//        if($userId){
+//           User::where('userid', $userId)->first();
+//        }
+//
+//        if($userPw){
+//            $out = User::where('password', $userPw)->first();
+//        }
+//        Log::info($out);
+//
+//        return (empty($out));
+//    }
 
 
 

@@ -18,8 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// User 로그인
-Route::get('/users/Login/{userid}', [\App\Http\Controllers\Api\vi\User\UsersController::class, 'login']);
+
+Route::post('/users/login', [\App\Http\Controllers\Api\vi\User\UsersController::class, 'login']);
+
 
 
 // User 회원가입
