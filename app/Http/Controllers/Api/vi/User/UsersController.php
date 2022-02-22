@@ -12,9 +12,38 @@ use Illuminate\Support\Facades\Log;
 class UsersController extends Controller
 {
 
+    // 로그아웃 메서드
+    public function logout()
+    {
+        Auth::guard('api')->logout();
+
+        return response()->json([
+           'status' => 'success',
+           'message' => 'logout'
+        ], 200);
+    }
+
+    //토큰 갱신 메서드
+    public function refresh() {
+        return $this->respondWithToken(Auth::guard('api')->refresh());
+    }
+
+
+
+
+    // 클라이언트(Client, 브라우저)의 요청(Request)으로 로그인한 유저의 정보를 얻어 응답(Response)하는 메서드
+    public function user()
+    {
+        return response()->json(Auth::guard('api')->user());
+    }
+
     //로그인 메서드
     public function login(Request $request)
     {
+        Log::info(__METHOD__);
+        Log::info($request);
+
+
         $validator=Validator::make($request->all(), [
             'userid' => 'required|min:8|unique:users|regex:/^[a-zA-Z0-9]*$/',
             'password'=> 'required|regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/',
@@ -205,7 +234,6 @@ class UsersController extends Controller
     protected function validator()
     {
     return Validator::make();
-
 
     }
 
