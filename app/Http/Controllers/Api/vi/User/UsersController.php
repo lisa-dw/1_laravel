@@ -20,9 +20,15 @@ class UsersController extends Controller
         $userPw = $request->password->first();
 
         if($userId){
-           $out = User::where('userid', $userId)->first();
+           User::where('userid', $userId)->first();
         }
-        return $out;
+
+        if($userPw){
+            $out = User::where('password', $userPw)->first();
+        }
+        Log::info($out);
+
+        return (empty($out));
     }
 
 
