@@ -5,19 +5,16 @@ namespace App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class orderUserInform extends Model
+class buyList extends Model
 {
     use HasFactory;
 
     protected $fillable = [
 
-        'order_id',
-        'user_id',
-        'name',
-        'phone',
-        'zip',
-        'address',
-        'subAdress',
+        'product_id',
+        'count',
+        'price',
+        'orderStatus',
 
     ];
 
@@ -27,5 +24,4 @@ class orderUserInform extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
 
     ];
-
 }

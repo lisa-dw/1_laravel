@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api\vi\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product\buyUserInform;
 use Illuminate\Http\Request;
 
-class ordersController extends Controller
+class buyUserInformsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class ordersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product\buyUserInform  $buyUserInform
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(buyUserInform $buyUserInform)
     {
         //
     }
@@ -43,10 +44,10 @@ class ordersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Product\buyUserInform  $buyUserInform
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, buyUserInform $buyUserInform)
     {
         //
     }
@@ -54,10 +55,10 @@ class ordersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product\buyUserInform  $buyUserInform
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(buyUserInform $buyUserInform)
     {
         //
     }

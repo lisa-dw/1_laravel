@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id()->comment('장바구니 번호');
             $table->string('user_userId')->comment('users 테이블의 userId(FK)');
-            $table->string('product_id')->comment('products 테이블의 id(FK) ');
+            $table->unsignedBigInteger('product_id')->comment('products 테이블의 id(FK)');
             $table->smallInteger('count')->comment('물품 갯수');
 
             // 외래키 지정
@@ -37,8 +37,8 @@ class CreateCartsTable extends Migration
     public function down()
     {
         Schema::table('carts', function (Blueprint $table){
-           $table->dropForeign('user_userId');
-           $table->dropForeign('product_id');
+           $table->dropForeign('carts_user_userId_foreign');
+           $table->dropForeign('carts_product_id_foreign');
         });
         Schema::dropIfExists('carts');
     }
