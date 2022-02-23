@@ -16,8 +16,8 @@ class CreateBuyListsTable extends Migration
         Schema::create('buyLists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->comment('제품의 id (FK)');
-            $table->smallInteger('count')->comment('제품 갯수');
-            $table->smallInteger('price')->comment('총 주문 가격');
+            $table->unsignedBigInteger('count')->comment('제품 갯수');
+            $table->unsignedBigInteger('price')->comment('총 주문 가격');
 
             $table->string('orderStatus')->nullable()->comment('주문 처리 상태');
 

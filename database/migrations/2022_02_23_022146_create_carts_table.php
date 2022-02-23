@@ -17,7 +17,7 @@ class CreateCartsTable extends Migration
             $table->id()->comment('장바구니 번호');
             $table->string('user_userId')->comment('users 테이블의 userId(FK)');
             $table->unsignedBigInteger('product_id')->comment('products 테이블의 id(FK)');
-            $table->smallInteger('count')->comment('물품 갯수');
+            $table->unsignedBigInteger('count')->comment('물품 갯수');
 
             // 외래키 지정
             $table->foreign('user_userId')->references('userId')->on('users')
