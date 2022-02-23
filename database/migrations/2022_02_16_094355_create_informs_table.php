@@ -35,6 +35,10 @@ class CreateInformsTable extends Migration
      */
     public function down()
     {
+        Schema::table('informs', function (Blueprint $table){
+            $table->dropForeign('informs_user_userid_foreign');
+        });
+
         Schema::dropIfExists('informs');
     }
 }

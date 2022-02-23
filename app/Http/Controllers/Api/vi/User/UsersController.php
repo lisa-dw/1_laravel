@@ -4,13 +4,23 @@ namespace App\Http\Controllers\Api\vi\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Contracts\Validation\Validator;
+use \Illuminate\Support\Facades\Validator;
+//use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
+
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
 
     // 로그아웃 메서드
     public function logout()
@@ -37,66 +47,78 @@ class UsersController extends Controller
         return response()->json(Auth::guard('api')->user());
     }
 
+
     //로그인 메서드
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         Log::info(__METHOD__);
         Log::info($request);
 
-
-        $validator=Validator::make($request->all(), [
-            'userid' => 'required|min:8|unique:users|regex:/^[a-zA-Z0-9]*$/',
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/',
             'password'=> 'required|regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/',
         ]);
+
+        Log::info('유효성검사 끝.');
+//        Log::info($validator);
 
         if($validator->fails()){
             return response()->json([
                'status' => 'error',
                'messages' => $validator->messages()
-            ], 200);
+            ], 400);
         }
 
+//        Log::info('$validator->fails() 아님');
+//
+//        Log::info(json_encode(auth()));
+//        Log::info(json_encode(auth('api')));
 
-        if(!$token = Auth::guard('api')->attempt(['userid'=>$request->userid, 'password'=>$request->password]))
+
+
+
+//        if(!$token = Auth::guard('api')->attempt(['userid'=>$request->userid, 'password'=>$request->password]))
+        //$credentials = request(['userid', 'password']);
+        //if(!$token = auth('api')->attempt(['userid' => $request->userid, 'password' => $request->password, ]))
+        if(!$token = auth()->attempt($validator->validated()))
         {
             return response()->json(['error'=>'Unauthorized', 401]);
         }
+
         return $this->respondWithToken($token);
+
+
 
     }
 
     // 토큰 생성 메서드 : 로그인에 성공하면 요청(Request)에 대한 jwt 토큰을 반환(Response)
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     protected function respondWithToken($token)
     {
+        Log::info('respondWithToken 메서드 실행');
+        Log::info($token);
+
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' =>Auth::guard('api')->factory()->getTTL() * 60
+            'expires_in' =>auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
         ]);
     }
 
 
-
-
-//    public function login(Request $request){
-//
-//        Log::info('request');
-//        Log::info($request);
-//
-//        $userId = $request->userid->first();
-//        $userPw = $request->password->first();
-//
-//        if($userId){
-//           User::where('userid', $userId)->first();
-//        }
-//
-//        if($userPw){
-//            $out = User::where('password', $userPw)->first();
-//        }
-//        Log::info($out);
-//
-//        return (empty($out));
-//    }
 
 
 
@@ -189,6 +211,7 @@ class UsersController extends Controller
 
         //2. 데이터가 저장된다(회원가입이 된다)
         $outs = User::create($request->all());
+
 
         Log::info($outs);
 
