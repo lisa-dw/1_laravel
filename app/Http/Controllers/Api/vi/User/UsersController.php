@@ -74,12 +74,10 @@ class UsersController extends Controller
             ], 400);
         }
 
-//        Log::info('$validator->fails() 아님');
+        Log::info('$validator->fails() 아님');
 //
 //        Log::info(json_encode(auth()));
 //        Log::info(json_encode(auth('api')));
-
-
 
 
 //        if(!$token = Auth::guard('api')->attempt(['userid'=>$request->userid, 'password'=>$request->password]))
@@ -91,8 +89,6 @@ class UsersController extends Controller
         }
 
         return $this->respondWithToken($token);
-
-
 
     }
 
