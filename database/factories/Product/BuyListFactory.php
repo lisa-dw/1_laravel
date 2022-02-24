@@ -5,7 +5,7 @@ namespace Database\Factories\Product;
 use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class buyListFactory extends Factory
+class BuyListFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,10 +16,9 @@ class buyListFactory extends Factory
     {
         return [
             'product_id' => Product::inRandomOrder()->first()->id,
-            'count' => $this->faker->numberBetween(0, 5),
+            'count' => $this->faker->numberBetween(1,5),
             'price'=> $this->faker->numberBetween(1000, 100000),
-            'orderStatus'=> $this->faker->numberBetween(0, 2),
-
+            'orderStatus'=>1,
         ];
     }
 }

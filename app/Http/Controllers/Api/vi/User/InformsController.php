@@ -76,8 +76,8 @@ class InformsController extends Controller
      */
     public function destroy(Inform $inform)
     {
-        $out = $inform->delete();
+        $outs = $inform->delete();
 
-        return $out;
+        return $outs;
     }
 }

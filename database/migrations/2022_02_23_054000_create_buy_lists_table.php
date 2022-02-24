@@ -13,13 +13,12 @@ class CreateBuyListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('buyLists', function (Blueprint $table) {
+        Schema::create('buy_lists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->comment('제품의 id (FK)');
             $table->unsignedBigInteger('count')->comment('제품 갯수');
             $table->unsignedBigInteger('price')->comment('총 주문 가격');
-
-            $table->string('orderStatus')->nullable()->comment('주문 처리 상태');
+            $table->unsignedBigInteger('orderStatus')->nullable()->comment('주문 처리 상태');
 
             //외래키 선언
             $table->foreign('product_id')->references('id')->on('products')
@@ -36,9 +35,9 @@ class CreateBuyListsTable extends Migration
      */
     public function down()
     {
-        Schema::table('buyLists', function (Blueprint $table){
-            $table->dropForeign('buyLists_product_id_foreign');
+        Schema::table('buy_lists', function (Blueprint $table){
+            $table->dropForeign('buy_lists_product_id_foreign');
         });
-        Schema::dropIfExists('buyLists');
+        Schema::dropIfExists('buy_lists');
     }
 }

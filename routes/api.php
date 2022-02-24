@@ -59,5 +59,9 @@ Route::apiResources([
 
     '/users' => App\Http\Controllers\Api\vi\User\UsersController::class,
     '/informs' => \App\Http\Controllers\Api\vi\User\InformsController::class,
+    '/products'=>\App\Http\Controllers\Api\vi\Product\ProductsController::class,
+    '/carts'=>\App\Http\Controllers\Api\vi\Product\CartsController::class,
+    '/buyLists'=>\App\Http\Controllers\Api\vi\Product\BuyListsController::class,
+    '/buyUserInforms'=>\App\Http\Controllers\Api\vi\Product\BuyUserInformsController::class,
 
 ]);

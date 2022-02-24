@@ -2,13 +2,12 @@
 
 namespace Database\Factories\Product;
 
-use App\Models\Product\buyList;
+use App\Models\Product\BuyList;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class buyUserInformFactory extends Factory
+class BuyUserInformFactory extends Factory
 {
-
     /**
      * Define the model's default state.
      *
@@ -17,7 +16,7 @@ class buyUserInformFactory extends Factory
     public function definition()
     {
         return [
-            'buyList_id'=> buyList::inRandomOrder()->first()->id,
+            'buy_list_id'=> BuyList::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'name'=>$this->faker->name(),
             'phone'=>$this->faker->phoneNumber(),

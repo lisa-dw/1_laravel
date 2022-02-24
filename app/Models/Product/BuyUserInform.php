@@ -5,13 +5,13 @@ namespace App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class buyUserInform extends Model
+class BuyUserInform extends Model
 {
     use HasFactory;
 
     protected $fillable = [
 
-        'buyList_id',
+        'buy_list_id',
         'user_id',
         'name',
         'phone',

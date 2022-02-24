@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product\buyList;
+use App\Models\Product\BuyList;
 use Illuminate\Database\Seeder;
 
 class BuyListsTableSeeder extends Seeder
@@ -14,6 +14,6 @@ class BuyListsTableSeeder extends Seeder
      */
     public function run()
     {
-        buyList::factory(10)->create();
+        BuyList::factory(10)->create();
     }
 }

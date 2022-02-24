@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product\buyUserInform;
+use App\Models\Product\BuyUserInform;
 use Illuminate\Database\Seeder;
 
 class BuyUserInformsTableSeeder extends Seeder
@@ -14,6 +14,6 @@ class BuyUserInformsTableSeeder extends Seeder
      */
     public function run()
     {
-        buyUserInform::factory(10)->create();
+        BuyUserInform::factory(10)->create();
     }
 }

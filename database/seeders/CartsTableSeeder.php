@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product\cart;
+use App\Models\Product\Cart;
 use Illuminate\Database\Seeder;
 
 class CartsTableSeeder extends Seeder
@@ -14,6 +14,6 @@ class CartsTableSeeder extends Seeder
      */
     public function run()
     {
-        cart::factory(5)->create();
+        Cart::factory(5)->create();
     }
 }

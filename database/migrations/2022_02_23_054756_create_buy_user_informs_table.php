@@ -13,9 +13,9 @@ class CreateBuyUserInformsTable extends Migration
      */
     public function up()
     {
-        Schema::create('buyUserInforms', function (Blueprint $table) {
+        Schema::create('buy_user_informs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('buyList_id')->comment('주문번호(FK): orders 테이블의 id');
+            $table->unsignedBigInteger('buy_list_id')->comment('주문번호(FK): orders 테이블의 id');
             $table->unsignedBigInteger('user_id')->comment('유저 아이디(FK): users 테이블의 id');
             $table->string('name')->nullable()->comment('주문자 이름');
             $table->string('phone')->nullable()->comment('주문자 전화번호');
@@ -24,7 +24,7 @@ class CreateBuyUserInformsTable extends Migration
             $table->string('subAdress')->nullable()->comment('주문자 상세 배송지');
 
             //외래키 선언
-            $table->foreign('buyList_id')->references('id')->on('buyLists')
+            $table->foreign('buy_list_id')->references('id')->on('buy_lists')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -40,10 +40,10 @@ class CreateBuyUserInformsTable extends Migration
      */
     public function down()
     {
-        Schema::table('buyUserInforms', function (Blueprint $table){
-            $table->dropForeign('buyUserInforms_buyList_id_foreign');
-            $table->dropForeign('buyUserInforms_user_id_foreign');
+        Schema::table('buy_user_informs', function (Blueprint $table){
+            $table->dropForeign('buy_user_informs_buy_list_id_foreign');
+            $table->dropForeign('buy_user_informs_user_id_foreign');
         });
-        Schema::dropIfExists('buyUserInforms');
+        Schema::dropIfExists('buy_user_informs');
     }
 }
