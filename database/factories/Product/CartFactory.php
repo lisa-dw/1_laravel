@@ -16,7 +16,7 @@ class CartFactory extends Factory
     public function definition()
     {
         return [
-            'user_userId'=>User::inRandomOrder()->first()->userid,
+//            'user_userId'=>User::inRandomOrder()->first()->userid,
             'product_id'=>Product::inRandomOrder()->first()->id,
             'count' => $this->faker->numberBetween(1,10),
         ];

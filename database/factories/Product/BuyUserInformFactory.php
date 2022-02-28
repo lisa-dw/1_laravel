@@ -17,7 +17,7 @@ class BuyUserInformFactory extends Factory
     {
         return [
             'buy_list_id'=> BuyList::inRandomOrder()->first()->id,
-            'user_id' => User::inRandomOrder()->first()->id,
+//            'user_id' => User::inRandomOrder()->first()->id,
             'name'=>$this->faker->name(),
             'phone'=>$this->faker->phoneNumber(),
             'zip'=>$this->faker->postcode(),

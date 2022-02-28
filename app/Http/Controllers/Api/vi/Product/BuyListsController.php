@@ -13,8 +13,12 @@ class BuyListsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $userId)
     {
+        if($userId){
+            BuyList::all()->with('user_id',$userId);
+            $result = DB::query("select * from order o left join product p o.product_id on p.id");
+        }
         $outs = BuyList::all();
 
         return $outs;
