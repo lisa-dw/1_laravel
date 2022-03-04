@@ -11,6 +11,7 @@ class BuyList extends Model
 
     protected $fillable = [
 
+        'order_num',
         'product_id',
         'count',
         'price',

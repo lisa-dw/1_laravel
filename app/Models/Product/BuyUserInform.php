@@ -11,8 +11,9 @@ class BuyUserInform extends Model
 
     protected $fillable = [
 
-        'buy_list_id',
-//        'user_id',
+//        'buy_list_id',
+        'order_num',
+        'user_id',
         'name',
         'phone',
         'zip',

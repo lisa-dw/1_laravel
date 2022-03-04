@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\vi\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product\BuyUserInform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BuyUserInformsController extends Controller
 {
@@ -28,7 +29,12 @@ class BuyUserInformsController extends Controller
      */
     public function store(Request $request)
     {
+
+        Log::info($request->all());
+        $request->user_id = 31;
+        Log::info($request->all());
         $outs = BuyUserInform::create($request->all());
+
         return $outs;
     }
 

@@ -16,8 +16,9 @@ class BuyUserInformFactory extends Factory
     public function definition()
     {
         return [
-            'buy_list_id'=> BuyList::inRandomOrder()->first()->id,
-//            'user_id' => User::inRandomOrder()->first()->id,
+//            'buy_list_id'=> BuyList::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
+            'order_num'=>$this->faker->numberBetween(100000000,300000000),
             'name'=>$this->faker->name(),
             'phone'=>$this->faker->phoneNumber(),
             'zip'=>$this->faker->postcode(),

@@ -16,6 +16,7 @@ class BuyListFactory extends Factory
     {
         return [
             'product_id' => Product::inRandomOrder()->first()->id,
+            'order_num'=>$this->faker->numberBetween(100000000,300000000),
             'count' => $this->faker->numberBetween(1,5),
             'price'=> $this->faker->numberBetween(1000, 100000),
             'orderStatus'=>1,

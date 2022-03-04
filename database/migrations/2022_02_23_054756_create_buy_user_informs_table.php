@@ -15,8 +15,9 @@ class CreateBuyUserInformsTable extends Migration
     {
         Schema::create('buy_user_informs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('buy_list_id')->comment('주문번호(FK): orders 테이블의 id');
-//            $table->unsignedBigInteger('user_id')->comment('유저 아이디(FK): users 테이블의 id');
+//            $table->unsignedBigInteger('buy_list_id')->comment('주문번호(FK): orders 테이블의 id');
+            $table->unsignedBigInteger('user_id')->comment('유저 아이디(FK): users 테이블의 id');
+            $table->string('order_num')->comment('주문 번호');
             $table->string('name')->nullable()->comment('주문자 이름');
             $table->string('phone')->nullable()->comment('주문자 전화번호');
             $table->string('zip')->nullable()->comment('주문자 우편번호');
@@ -24,10 +25,10 @@ class CreateBuyUserInformsTable extends Migration
             $table->string('subAdress')->nullable()->comment('주문자 상세 배송지');
 
             //외래키 선언
-            $table->foreign('buy_list_id')->references('id')->on('buy_lists')
-                ->onUpdate('cascade')->onDelete('cascade');
-//            $table->foreign('user_id')->references('id')->on('users')
+//            $table->foreign('buy_list_id')->references('id')->on('buy_lists')
 //                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });

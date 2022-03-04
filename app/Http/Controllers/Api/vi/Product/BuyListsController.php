@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\vi\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product\BuyList;
+use App\Models\Product\BuyUserInform;
 use Illuminate\Http\Request;
 
 class BuyListsController extends Controller
@@ -15,10 +16,10 @@ class BuyListsController extends Controller
      */
     public function index(Request $userId)
     {
-        if($userId){
-            BuyList::all()->with('user_id',$userId);
-            $result = DB::query("select * from order o left join product p o.product_id on p.id");
-        }
+//        if($userId){
+//            BuyList::all()->with('user_id',$userId);
+//            $result = DB::query("select * from order o left join product p o.product_id on p.id");
+//        }
         $outs = BuyList::all();
 
         return $outs;
@@ -32,7 +33,10 @@ class BuyListsController extends Controller
      */
     public function store(Request $request)
     {
+//        BuyList::create($request->buyList);
         $outs = BuyList::create($request->all());
+
+//        BuyUserInform::create($request->all());
         return $outs;
     }
 

@@ -38,9 +38,9 @@ class DatabaseSeeder extends Seeder
 
          $this->call(ProductsTableSeeder::class);
 
-         $this->call(CartsTableSeeder::class);
-         $this->call(BuyListsTableSeeder::class);
-         $this->call(BuyUserInformsTableSeeder::class);
+//         $this->call(CartsTableSeeder::class);
+//         $this->call(BuyListsTableSeeder::class);
+//         $this->call(BuyUserInformsTableSeeder::class);
 
         if (config('database.default') !== 'sqlite') {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
