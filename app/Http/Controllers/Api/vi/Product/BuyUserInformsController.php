@@ -30,12 +30,13 @@ class BuyUserInformsController extends Controller
     public function store(Request $request)
     {
 
-        Log::info($request->all());
-        $request->user_id = 31;
-        Log::info($request->all());
+//        Log::info($request->all());
+//        $request->user_id = 31;
+//        Log::info($request->all());
+
         $outs = BuyUserInform::create($request->all());
 
-        return $outs;
+        return $outs;  // return을 해줘야 프론트로 응답이 간다.
     }
 
     /**

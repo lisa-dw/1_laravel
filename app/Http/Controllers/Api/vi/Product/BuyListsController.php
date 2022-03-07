@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product\BuyList;
 use App\Models\Product\BuyUserInform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BuyListsController extends Controller
 {
@@ -20,7 +21,7 @@ class BuyListsController extends Controller
 //            BuyList::all()->with('user_id',$userId);
 //            $result = DB::query("select * from order o left join product p o.product_id on p.id");
 //        }
-        $outs = BuyList::all();
+        $outs = BuyList::orderBy('id', 'desc')->get();
 
         return $outs;
     }
@@ -33,11 +34,35 @@ class BuyListsController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info(__METHOD__);
+        Log::info($request);
+
+        try {
+
+            $buyLists = $request->all();
+
+//            foreach ($buyLists as $i => $buyList) {
+//
+//                $outs = BuyList::create($buyList);
+//
+//                return $outs;
+//
+//            }
+            return $buyLists;
+
+        } catch (\Exception $e) {
+            Log::info(__METHOD__ . ': error');
+            Log::error($e->getMessage());
+
+        }
+
+
+
 //        BuyList::create($request->buyList);
-        $outs = BuyList::create($request->all());
+//        $outs = BuyList::create($request->all());
 
 //        BuyUserInform::create($request->all());
-        return $outs;
+//        return $outs;
     }
 
     /**

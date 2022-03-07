@@ -10,13 +10,11 @@ class BuyList extends Model
     use HasFactory;
 
     protected $fillable = [
-
         'order_num',
         'product_id',
         'count',
         'price',
         'orderStatus',
-
     ];
 
     protected $casts = [
